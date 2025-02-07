@@ -4,8 +4,13 @@ import { CheckboxFilter } from "./CheckboxFilter";
 import { PassengerFilter } from "./PassangerFilter";
 import { PriceFilter } from "./PriceFilter";
 
+export type FilterProps = {
+  form: ReturnType<typeof useFormContext<FormValues>>;
+};
+
 export function AdditionalFilters() {
   const form = useFormContext<FormValues>();
+  const selectedMinPassengers = form.watch("minPassengers");
 
   return (
     <div className="flex flex-col md:px-4 px-0 md:py-4 py-4 gap-4">
@@ -14,7 +19,7 @@ export function AdditionalFilters() {
       </div>
 
       <PriceFilter form={form} />
-      <PassengerFilter />
+      <PassengerFilter form={form} minPassengers={selectedMinPassengers} />
       <CheckboxFilter />
     </div>
   );

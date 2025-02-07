@@ -1,5 +1,3 @@
-import { useFormContext } from "react-hook-form";
-import { FormValues } from "../../form";
 import {
   FormControl,
   FormField,
@@ -9,12 +7,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { FILTER_MAX_PRICE, FILTER_MIN_PRICE } from "@/utils/constants";
+import type { FilterProps } from ".";
 
-type FilterProps = {
-  form: ReturnType<typeof useFormContext<FormValues>>;
-};
+type PriceFilterProps = FilterProps;
 
-export function PriceFilter({ form }: FilterProps) {
+export function PriceFilter({ form }: PriceFilterProps) {
   const convertToCurrency = (value: number) =>
     value.toLocaleString("en-US", {
       style: "currency",
