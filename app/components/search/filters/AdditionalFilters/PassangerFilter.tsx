@@ -19,7 +19,7 @@ export function PassengerFilter({ form, minPassengers }: PassengerFilterProps) {
       name="minPassengers"
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="text-lg">Passengers</FormLabel>
+          <FormLabel className="text-lg">Passengers count</FormLabel>
           <Select
             value={minPassengers.toString()}
             onValueChange={(value) => {
