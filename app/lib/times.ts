@@ -1,3 +1,5 @@
+import { differenceInDays, differenceInHours } from "date-fns";
+
 export const roundToNearest30Minutes = (date: Date): Date => {
   const minutes = date.getMinutes();
   const roundedMinutes = Math.round(minutes / 30) * 30;
@@ -11,3 +13,10 @@ export const roundToNearest30Minutes = (date: Date): Date => {
     0,
   );
 };
+
+export function getDiffInDays(startDate: Date, endDate: Date) {
+  return {
+    differenceInDays: differenceInDays(endDate, startDate),
+    differenceInHours: differenceInHours(endDate, startDate),
+  };
+}

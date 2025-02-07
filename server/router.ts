@@ -97,6 +97,10 @@ const vehicleRouter = router({
           .describe(
             "The maximum hourly price. When set to 100 or more, there is no maximum.",
           ),
+        orderBy: z
+          .enum(["price_asc", "price_desc", "name_asc", "name_desc"])
+          .optional()
+          .describe("The vehicle sort order."),
       }),
     )
     .meta({ description: "Searches for available vehicles based on criteria." })
@@ -112,6 +116,7 @@ const vehicleRouter = router({
           make,
           priceMin,
           priceMax,
+          orderBy: FormOrderBy,
         } = input;
 
         const parsedPage = page;
@@ -148,10 +153,22 @@ const vehicleRouter = router({
           },
         };
 
+        const orderByMapping: Record<string, Record<string, "asc" | "desc">> = {
+          name_asc: { make: "asc" },
+          name_desc: { make: "desc" },
+          price_asc: { hourly_rate_cents: "asc" },
+          price_desc: { hourly_rate_cents: "desc" },
+        };
+
+        const orderBy: Record<string, "asc" | "desc"> = FormOrderBy
+          ? orderByMapping[FormOrderBy] || { hourly_rate_cents: "asc" }
+          : { hourly_rate_cents: "asc" };
+
         const availableVehicles = await prisma.vehicle.findMany({
           where: baseWhereClause,
           skip: (parsedPage - 1) * parsedLimit,
           take: parsedLimit,
+          orderBy,
         });
 
         const totalCount = await prisma.vehicle.count({
