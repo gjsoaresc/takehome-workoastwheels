@@ -9,9 +9,9 @@ import { Suspense, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useForm } from "react-hook-form";
 import { FormValues } from "@/components/search/form.tsx";
-import { AdditionalFilters } from "@/components/search/AdditionalFilters.tsx";
+import { AdditionalFilters } from "@/components/search/filters/AdditionalFilters";
 import { VehicleList } from "@/components/search/VehicleList.tsx";
-import { TimeRangeFilters } from "@/components/search/TimeRangeFilters.tsx";
+import { TimeRangeFilters } from "@/components/search/filters/TimeRangeFilters";
 
 export function SearchPage() {
   const [initialStartDateAndTime] = useState(() =>
