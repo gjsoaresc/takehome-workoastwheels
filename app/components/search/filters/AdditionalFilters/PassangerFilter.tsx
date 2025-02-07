@@ -31,7 +31,7 @@ export function PassengerFilter({ form, minPassengers }: PassengerFilterProps) {
               <SelectValue placeholder="Select passengers count" />
             </SelectTrigger>
             <SelectContent>
-              {[2, 4, 5, 7, 8].map((count) => (
+              {[1, 2, 4, 5, 7, 8].map((count) => (
                 <SelectItem key={count} value={count.toString()}>
                   {count}
                   {count === 8 ? "+" : ""}
